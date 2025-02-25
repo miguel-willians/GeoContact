@@ -4,11 +4,11 @@ import Input from "@/ui/Input";
 import Logo from "@/ui/Logo";
 import Link from "next/link";
 
-export default function Login() {
+export default function SignIn() {
   return (
     <main className="min-h-screen grid grid-cols-[48rem] content-center justify-center gap-8 bg-gray-50">
       <Logo />
-      <h1>Faça o login na sua conta!</h1>
+      <h1>Crie sua conta!</h1>
       <Form>
         <FormRowVertical label="E-mail">
           <Input type="email" id="e-mail" autoComplete="username" />
@@ -23,10 +23,9 @@ export default function Login() {
         </FormRowVertical>
 
         <div className=" flex flex-col justify-center items-center gap-2 mt-3">
-          <Link href="/main">Login</Link>
+          <Link href="/main">Criar conta</Link>
           <p>
-            Não possui uma conta ainda?{" "}
-            <Link href="/">Crie uma conta agora.</Link>
+            Já possui uma conta? <Link href="/">Logue-se agora.</Link>
           </p>
         </div>
       </Form>

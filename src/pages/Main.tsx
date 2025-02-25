@@ -5,10 +5,10 @@ import User from "@/features/user/User";
 
 export default function App() {
   return (
-    <div className="h-screen p-6 overscroll-none flex relative">
+    <main className="h-screen p-6 overscroll-none flex relative">
       <Sidebar />
       <Map />
       <User />
-    </div>
+    </main>
   );
 }

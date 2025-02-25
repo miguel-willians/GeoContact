@@ -1,4 +1,4 @@
-import App from "@/pages/App";
+import App from "@/pages/Main";
 
 export default function Main() {
   return <App />;
