@@ -26,7 +26,7 @@ export default function Login() {
           <Link href="/main">Login</Link>
           <p>
             Não possui uma conta ainda?{" "}
-            <Link href="/">Crie uma conta agora.</Link>
+            <Link href="/signUp">Crie uma conta agora.</Link>
           </p>
         </div>
       </Form>

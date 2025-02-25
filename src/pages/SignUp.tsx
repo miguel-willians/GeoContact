@@ -4,7 +4,7 @@ import Input from "@/ui/Input";
 import Logo from "@/ui/Logo";
 import Link from "next/link";
 
-export default function SignIn() {
+export default function NewUserForm() {
   return (
     <main className="min-h-screen grid grid-cols-[48rem] content-center justify-center gap-8 bg-gray-50">
       <Logo />
