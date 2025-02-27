@@ -1,3 +1,3 @@
 export default function Logo() {
-  return <h1>Logo</h1>;
+  return <h1 className="text-5xl">📍GeoContact</h1>;
 }
