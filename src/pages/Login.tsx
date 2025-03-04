@@ -22,7 +22,12 @@ export default function Login() {
       <h1 className="text-xl">Faça o login na sua conta!</h1>
       <Form>
         <FormRowVertical label="E-mail">
-          <Input type="email" id="e-mail" autoComplete="username" />
+          <Input
+            type="email"
+            id="e-mail"
+            autoComplete="username"
+            styleType="regular"
+          />
         </FormRowVertical>
 
         <FormRowVertical label="Senha">
@@ -30,6 +35,7 @@ export default function Login() {
             type="password"
             id="password"
             autoComplete="current-password"
+            styleType="regular"
           />
         </FormRowVertical>
 

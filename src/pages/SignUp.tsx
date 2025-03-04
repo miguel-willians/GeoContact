@@ -22,7 +22,12 @@ export default function NewUserForm() {
       <h1 className="text-xl">Crie sua conta!</h1>
       <Form>
         <FormRowVertical label="E-mail">
-          <Input type="email" id="e-mail" autoComplete="username" />
+          <Input
+            type="email"
+            id="e-mail"
+            autoComplete="username"
+            styleType="regular"
+          />
         </FormRowVertical>
 
         <FormRowVertical label="Senha">
@@ -30,6 +35,7 @@ export default function NewUserForm() {
             type="password"
             id="password"
             autoComplete="current-password"
+            styleType="regular"
           />
         </FormRowVertical>
 
