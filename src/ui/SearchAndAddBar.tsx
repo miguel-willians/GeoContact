@@ -7,7 +7,11 @@ export default function SearchAndAddBar() {
   return (
     <div className="flex justify-between w-full">
       <div className="flex">
-        <Input type="text" placeholder="Pesquise seu contato..." />
+        <Input
+          type="text"
+          styleType="regular"
+          placeholder="Pesquise seu contato..."
+        />
         <ButtonIcon>
           <MdPersonSearch />
         </ButtonIcon>

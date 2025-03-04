@@ -3,7 +3,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 
 export default function CreateNewContact() {
   return (
-    <Button type="small">
+    <Button type="pSmallWithIcon">
       <AiOutlineUserAdd className="text-xl" />
       Criar novo Contato
     </Button>

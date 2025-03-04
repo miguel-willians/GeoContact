@@ -14,7 +14,7 @@ export default function CreateNewContactForm() {
         <Input type="text" id="cpf" styleType="small" />
       </FormRowHorizontal>
 
-      <FormRowHorizontal label="Telefone" error="Oi">
+      <FormRowHorizontal label="Telefone">
         <Input type="tel" id="contactNumber" styleType="small" />
       </FormRowHorizontal>
 
@@ -30,9 +30,9 @@ export default function CreateNewContactForm() {
         <Input type="text" id="city" styleType="small" />
       </FormRowHorizontal>
 
-      <div className="flex flex-col justify-center mt-4">
-        <Button type="primary">Criar contato</Button>
-        <Button type="secondary">Cancelar</Button>
+      <div className="flex justify-center mt-9 gap-2">
+        <Button type="pSmall">Criar contato</Button>
+        <Button type="sSmall">Cancelar</Button>
       </div>
     </Form>
   );
