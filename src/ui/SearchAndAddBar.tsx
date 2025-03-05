@@ -12,7 +12,7 @@ export default function SearchAndAddBar() {
           styleType="regular"
           placeholder="Pesquise seu contato..."
         />
-        <ButtonIcon>
+        <ButtonIcon variant="search">
           <MdPersonSearch />
         </ButtonIcon>
       </div>
