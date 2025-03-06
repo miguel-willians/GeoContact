@@ -1,10 +1,13 @@
-import { ReactNode } from "react";
+import { ReactNode, FormHTMLAttributes } from "react";
 
-interface FormProps {
+interface FormProps extends FormHTMLAttributes<HTMLFormElement> {
   children: ReactNode; // Permite múltiplos elementos React ou strings
-  className?: string;
 }
 
-export default function Form({ children, className }: FormProps) {
-  return <form className={className}>{children}</form>;
+export default function Form({ children, className, ...rest }: FormProps) {
+  return (
+    <form className={className} {...rest}>
+      {children}
+    </form>
+  );
 }
