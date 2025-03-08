@@ -10,3 +10,12 @@ export async function getContacts() {
 
   return data;
 }
+
+export async function deleteContact(id: string) {
+  const { error } = await supabase.from("contacts").delete().eq("id", id);
+
+  if (error) {
+    console.log(error);
+    throw new Error("Contact could not be deleted.");
+  }
+}

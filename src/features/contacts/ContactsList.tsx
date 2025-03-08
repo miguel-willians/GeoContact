@@ -19,7 +19,12 @@ export default function ContactsList() {
   return (
     <ul className="w-full h-[65vh] list-none overflow-y-hidden overflow-x-hidden grid grid-cols-2 content-start gap-4">
       {contacts?.map((contact) => (
-        <ContactItem name={contact.name} cpf={contact.cpf} key={contact.id} />
+        <ContactItem
+          name={contact.name}
+          cpf={contact.cpf}
+          key={contact.id}
+          id={contact.id}
+        />
       ))}
     </ul>
   );
