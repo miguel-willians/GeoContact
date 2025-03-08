@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1",
     "@tanstack/react-query": "^5.67.2",
+    "brazilian-values": "^0.13.0",
     "cpf-cnpj-validator": "^1.0.3",
     "leaflet": "^1.9.4",
     "next": "15.1.7",
