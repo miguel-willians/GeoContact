@@ -1,21 +1,26 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, ButtonHTMLAttributes } from "react";
 import Link from "next/link";
 
-type ButtonProps = {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
-  disabled?: boolean;
   href?: string;
-  type: "primary" | "secondary" | "pSmall" | "sSmall" | "pSmallWithIcon";
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  variation?: "primary" | "secondary" | "pSmall" | "sSmall" | "pSmallWithIcon";
 };
 
-function Button({ children, disabled, href, type, onClick }: ButtonProps) {
+function Button({
+  children,
+  disabled,
+  href,
+  variation = "primary",
+  onClick,
+  ...props
+}: ButtonProps) {
   const base =
     "inline-block rounded-md text-sm font-semibold uppercase tracking-wide transition-colors duration-300 focus:outline-none focus:ring focus:ring-offset-2 disabled:cursor-not-allowed ";
 
-  const styles: Record<ButtonProps["type"], string> = {
+  const styles: Record<NonNullable<ButtonProps["variation"]>, string> = {
     primary:
       base +
       " bg-blue-500 text-white hover:bg-blue-300 focus:bg-blue-300 focus:ring-blue-300 px-4 py-3 md:px-6 md:py-4 w-96",
@@ -35,13 +40,18 @@ function Button({ children, disabled, href, type, onClick }: ButtonProps) {
 
   if (href)
     return (
-      <Link href={href} className={styles[type]}>
+      <Link href={href} className={styles[variation]}>
         {children}
       </Link>
     );
 
   return (
-    <button disabled={disabled} className={styles[type]} onClick={onClick}>
+    <button
+      disabled={disabled}
+      className={styles[variation]}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );

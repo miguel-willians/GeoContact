@@ -47,7 +47,7 @@ export default function CreateNewContactForm() {
     // Preencher os campos com os dados retornados pela API
     setValue("address", data.logradouro || "");
     setValue("city", data.localidade || "");
-    setValue("uf", data.uf || "");
+    setValue("state", data.uf || "");
     setValue("complement", data.complemento || "");
 
     setIsLoadingCep(false);
@@ -176,10 +176,10 @@ export default function CreateNewContactForm() {
       <input type="hidden" id="longitude" />
 
       <div className="flex justify-center mt-9 gap-2">
-        <Button type="pSmall" disabled={isCreating}>
+        <Button variation="pSmall" type="submit" disabled={isCreating}>
           Criar contato
         </Button>
-        <Button type="sSmall" disabled={isCreating}>
+        <Button variation="sSmall" disabled={isCreating}>
           Cancelar
         </Button>
       </div>
