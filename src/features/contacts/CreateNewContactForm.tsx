@@ -4,8 +4,10 @@ import FormRowHorizontal from "@/ui/FormRowHorizontal";
 import Input from "@/ui/Input";
 import { useForm } from "react-hook-form";
 import { cpf as cpfValidator } from "cpf-cnpj-validator";
-import { isCEP } from "brazilian-values"; // Pacote para validar o CEP
+import { isCEP } from "brazilian-values";
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createContact } from "@/services/apiContacts";
 
 export default function CreateNewContactForm() {
   const {
@@ -14,6 +16,17 @@ export default function CreateNewContactForm() {
     setValue,
     formState: { errors },
   } = useForm();
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending: isCreating } = useMutation({
+    mutationFn: createContact,
+    onSuccess: () => {
+      alert("Contato criado com sucesso!");
+      queryClient.invalidateQueries({ queryKey: ["contacts"] });
+    },
+    onError: (err) => alert(err.message),
+  });
 
   const [isLoadingCep, setIsLoadingCep] = useState(false);
   const [cepError, setCepError] = useState("");
@@ -40,8 +53,8 @@ export default function CreateNewContactForm() {
     setIsLoadingCep(false);
   }
 
-  const onSubmit = (data: any) => {
-    console.log("Dados enviados:", data);
+  const onSubmit = (data: object) => {
+    mutate(data);
   };
 
   return (
@@ -106,15 +119,15 @@ export default function CreateNewContactForm() {
       </FormRowHorizontal>
 
       <FormRowHorizontal
-        label="UF"
+        label="Estado"
         error={errors.uf?.message as string | undefined}
       >
         <Input
           type="text"
-          id="uf"
+          id="state"
           styleType="small"
-          {...register("uf", {
-            required: "A Unidade Federativa é obrigatória",
+          {...register("state", {
+            required: "O estado é obrigatório",
           })}
           disabled={isLoadingCep}
         />
@@ -163,8 +176,12 @@ export default function CreateNewContactForm() {
       <input type="hidden" id="longitude" />
 
       <div className="flex justify-center mt-9 gap-2">
-        <Button type="pSmall">Criar contato</Button>
-        <Button type="sSmall">Cancelar</Button>
+        <Button type="pSmall" disabled={isCreating}>
+          Criar contato
+        </Button>
+        <Button type="sSmall" disabled={isCreating}>
+          Cancelar
+        </Button>
       </div>
     </Form>
   );

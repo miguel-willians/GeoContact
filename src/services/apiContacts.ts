@@ -11,6 +11,20 @@ export async function getContacts() {
   return data;
 }
 
+export async function createContact(newContact: object) {
+  const { data, error } = await supabase
+    .from("contacts")
+    .insert([newContact])
+    .select();
+
+  if (error) {
+    console.log(error);
+    throw new Error("Contact could not be created.");
+  }
+
+  return data;
+}
+
 export async function deleteContact(id: string) {
   const { error } = await supabase.from("contacts").delete().eq("id", id);
 
