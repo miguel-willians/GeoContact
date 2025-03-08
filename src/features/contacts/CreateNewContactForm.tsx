@@ -41,14 +41,41 @@ export default function CreateNewContactForm() {
     setIsLoadingCep(true);
     setCepError("");
 
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const data = await response.json();
+    try {
+      // 1. Buscar dados do CEP via ViaCEP
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await response.json();
 
-    // Preencher os campos com os dados retornados pela API
-    setValue("address", data.logradouro || "");
-    setValue("city", data.localidade || "");
-    setValue("state", data.uf || "");
-    setValue("complement", data.complemento || "");
+      if (data.erro) {
+        setCepError("CEP não encontrado");
+        setIsLoadingCep(false);
+        return;
+      }
+
+      // Preencher os campos com os dados retornados
+      setValue("address", data.logradouro || "");
+      setValue("city", data.localidade || "");
+      setValue("state", data.uf || "");
+      setValue("complement", data.complemento || "");
+
+      // 2. Obter latitude e longitude com a API do Nominatim
+      const addressQuery = `${data.logradouro}, ${data.localidade}, ${data.uf}, Brasil`;
+      const geoResponse = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+          addressQuery
+        )}`
+      );
+      const geoData = await geoResponse.json();
+
+      if (geoData.length > 0) {
+        setValue("latitude", geoData[0].lat);
+        setValue("longitude", geoData[0].lon);
+      } else {
+        setCepError("Não foi possível obter as coordenadas. CEP inválido ");
+      }
+    } catch (error) {
+      setCepError("CEP inválido");
+    }
 
     setIsLoadingCep(false);
   }
