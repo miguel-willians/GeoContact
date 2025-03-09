@@ -9,6 +9,20 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createContact } from "@/services/apiContacts";
 
+// const newContact = {
+//   user_id: "11111111-1111-1111-1111-111111111111", // Criar uma forma de enviar o user_id junto dos valores
+//   name: "Email",
+//   cpf: "44444444444", // Remova os pontos e traços do CPF
+//   phone: "99999999999",
+//   cep: "11075-300",
+//   state: "SP",
+//   city: "Santos",
+//   address: "Rua Joaquim Távora",
+//   complement: "até 3aaaa27/328",
+//   latitude: -23.948936, // ALterar limite de campos para aguentar dados maiores
+//   longitude: -46.333654, // ALterar limite de campos para aguentar dados maiores
+// };
+
 export default function CreateNewContactForm() {
   const {
     register,
