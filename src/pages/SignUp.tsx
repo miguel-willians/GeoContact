@@ -40,7 +40,7 @@ export default function NewUserForm() {
         </FormRowVertical>
 
         <div className=" flex flex-col justify-center items-center gap-5 mt-3">
-          <Button type="primary" onClick={handleClick}>
+          <Button variation="primary" onClick={handleClick}>
             Criar Conta
           </Button>
           <p>
