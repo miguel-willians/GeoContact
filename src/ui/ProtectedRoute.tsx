@@ -2,16 +2,22 @@
 
 import { useUser } from "@/features/user/useUser";
 import { useRouter } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isPending, user, isAuthenticated } = useUser();
+  const { isPending, isAuthenticated } = useUser();
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (!isPending && !isAuthenticated) {
+      router.push("/");
+    }
+  }, [isPending, isAuthenticated, router]);
 
   if (isPending)
     return (
@@ -19,8 +25,6 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
         <p>Carregando...</p>
       </div>
     );
-
-  if (!isAuthenticated && !isPending) router.push("/");
 
   if (isAuthenticated) return children;
 }
