@@ -1,6 +1,7 @@
 "use client";
 
 import { useUser } from "@/features/user/useUser";
+import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 interface ProtectedRouteProps {
@@ -8,7 +9,9 @@ interface ProtectedRouteProps {
 }
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isPending, user } = useUser();
+  const { isPending, user, isAuthenticated } = useUser();
+
+  const router = useRouter();
 
   if (isPending)
     return (
@@ -17,5 +20,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       </div>
     );
 
-  return children;
+  if (!isAuthenticated && !isPending) router.push("/");
+
+  if (isAuthenticated) return children;
 }

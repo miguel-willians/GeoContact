@@ -1,5 +1,5 @@
 import { login as loginApi } from "@/services/apiAuth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 interface LoginCredentials {
@@ -8,6 +8,7 @@ interface LoginCredentials {
 }
 
 export function useLogin() {
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const { mutate: login, isPending: isLoggingIn } = useMutation({
@@ -15,6 +16,7 @@ export function useLogin() {
       loginApi({ email, password }),
     onSuccess: (user) => {
       console.log(user);
+      queryClient.setQueryData(["user"], user);
       router.push("/main");
     },
     onError: (err) => {
