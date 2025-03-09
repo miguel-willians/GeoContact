@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { MdErrorOutline } from "react-icons/md";
 
 interface FormRowVerticalProps {
   label?: string;
@@ -15,7 +16,12 @@ function FormRowVertical({ label, error, children }: FormRowVerticalProps) {
         </label>
       )}
       {children}
-      {error && <span className="text-red-700 text-sm">{error}</span>}
+      {error && (
+        <span className="text-white bg-blue-500 p-1 rounded-md text-sm ml-2 flex items-center gap-1">
+          <MdErrorOutline />
+          {error}
+        </span>
+      )}
     </div>
   );
 }
