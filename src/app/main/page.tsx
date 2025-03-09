@@ -1,5 +1,10 @@
 import App from "@/pages/Main";
+import ProtectedRoute from "@/ui/ProtectedRoute";
 
 export default function Main() {
-  return <App />;
+  return (
+    <ProtectedRoute>
+      <App />
+    </ProtectedRoute>
+  );
 }
