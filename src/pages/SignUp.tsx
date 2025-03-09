@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 
 import Button from "@/ui/Button";
 import Form from "@/ui/Form";
@@ -8,18 +7,29 @@ import Input from "@/ui/Input";
 import Logo from "@/ui/Logo";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useSignUp } from "@/features/user/useSignUp";
+
+type FormValues = {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};
 
 export default function NewUserForm() {
-  const router = useRouter();
+  const { signUp, isPending } = useSignUp();
 
   const {
     register,
     formState: { errors },
     getValues,
     handleSubmit,
-  } = useForm();
+    reset,
+  } = useForm<FormValues>();
 
-  function onSubmit(data: object) {}
+  function onSubmit({ name, email, password }: FormValues) {
+    signUp({ name, email, password }, { onSettled: () => reset });
+  }
 
   return (
     <main className="min-h-screen grid grid-cols-[48rem] content-center justify-center gap-8 bg-blue-950 text-white p-6">
@@ -35,6 +45,7 @@ export default function NewUserForm() {
             id="name"
             autoComplete="username"
             styleType="regular"
+            disabled={isPending}
             {...register("name", { required: "O nome é obrigatório" })}
           />
         </FormRowVertical>
@@ -48,6 +59,7 @@ export default function NewUserForm() {
             id="email"
             autoComplete="username"
             styleType="regular"
+            disabled={isPending}
             {...register("email", {
               required: "O e-mail é obrigatório",
               pattern: {
@@ -67,6 +79,7 @@ export default function NewUserForm() {
             id="password"
             autoComplete="current-password"
             styleType="regular"
+            disabled={isPending}
             {...register("password", {
               required: "A senha é obrigatória",
             })}
@@ -82,6 +95,7 @@ export default function NewUserForm() {
             id="passwordConfirm"
             autoComplete="current-password"
             styleType="regular"
+            disabled={isPending}
             {...register("passwordConfirm", {
               required: "Confirmar a senha é obrigatório",
               validate: (value) =>
@@ -91,7 +105,7 @@ export default function NewUserForm() {
         </FormRowVertical>
 
         <div className=" flex flex-col justify-center items-center gap-5 mt-3">
-          <Button variation="primary" type="submit">
+          <Button variation="primary" type="submit" disabled={isPending}>
             Criar Conta
           </Button>
           <p>
