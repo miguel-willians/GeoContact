@@ -16,7 +16,7 @@ export function useLogin() {
       loginApi({ email, password }),
     onSuccess: (user) => {
       console.log(user);
-      queryClient.setQueryData(["user"], user);
+      queryClient.setQueryData(["user"], user.user);
       router.push("/main");
     },
     onError: (err) => {
